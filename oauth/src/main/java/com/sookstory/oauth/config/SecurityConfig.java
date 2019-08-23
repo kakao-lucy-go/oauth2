@@ -20,10 +20,10 @@ import com.sookstory.oauth.provider.MyAuthenticationProvider;
 
 /**
  * 
- * WebSecurityConfigurer 인스턴스 생성.
- * WebSecurityConfigurerAdapter + EnableWebSecurity 어노테이션 콤보는 필수적.
- * Security config 구성
- * 앞 단 필터링 
+ * WebSecurityConfigurer �씤�뒪�꽩�뒪 �깮�꽦.
+ * WebSecurityConfigurerAdapter + EnableWebSecurity �뼱�끂�뀒�씠�뀡 肄ㅻ낫�뒗 �븘�닔�쟻.
+ * Security config 援ъ꽦
+ * �븵 �떒 �븘�꽣留� 
  * 
  * @FileName SecurityConfig.java
  * @Project oauth
@@ -39,18 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//인메모리 
-		System.out.println("custom authenticatoin provider 생성 ");
+		//�씤硫붾え由� 
+		System.out.println("custom authenticatoin provider �깮�꽦 ");
 		auth.authenticationProvider(authenticationProvider);
 	}
 	
 	
-	//지정한 url들은 모든 권한 접근 승인 
+	//吏��젙�븳 url�뱾�� 紐⑤뱺 沅뚰븳 �젒洹� �듅�씤 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
 		.csrf().disable()
+		//xml configuration이 아니라 java configuration을 사용하는 옵션
 		.headers().frameOptions().disable()
 		.and()
 		.authorizeRequests().antMatchers("/oauth/**","/oauth2/callback", "/oauth/token").permitAll()
